@@ -8,7 +8,7 @@ import { deliverySchema } from "../schemas/delivery.schema.js";
 import { payMethodSchema } from "../schemas/payMethods.schema.js";
 import { productSchema } from "../schemas/product.schema.js";
 import { stockSchema } from "../schemas/stock.schema.js";
-import { extrasSchema } from "../models/extras.schema.js";
+import { extrasSchema } from "../schemas/extras.schema.js";
 import { extrasControllers } from "../controllers/extras.controller.js";
 
 const router = Router();
@@ -94,13 +94,13 @@ router.post(
   extrasControllers.addExtras
 );
 
-router.get("/extras/:id", extrasControllers.getExtra);
+router.get("/extra/:id", extrasControllers.getExtra);
 
 router.delete("/extras/:id", extrasControllers.deleteExtras);
 
 router.put(
   "/extras/:id",
-  validateSchema(deliverySchema),
+  validateSchema(extrasSchema),
   extrasControllers.updateExtras
 );
 
