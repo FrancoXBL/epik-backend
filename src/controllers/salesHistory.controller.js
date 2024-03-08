@@ -1,9 +1,11 @@
 import SaleHistory from "../models/saleHistory.model.js";
-
+import Product from '../models/product.model.js'
+import PayMethods from '../models/payMethods.model.js'
+import Delivery from '../models/delivery.model.js'
 // Obtener todas las entradas de historial de ventas
 const getSaleHistory = async (req, res) => {
   try {
-    const saleHistory = await SaleHistory.find();
+    const saleHistory = await SaleHistory.find()
     res.json(saleHistory);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -28,23 +30,17 @@ const getSale = async (req, res) => {
 const addSaleHistory = async (req, res) => {
   try {
     const {
-      total,
-      client,
+      sale,
       delivery,
-      isTakeOut,
-      listSaleProducts,
-      listSaleExtras,
       payMethod,
+      date
     } = req.body;
 
     const newSaleHistory = new SaleHistory({
-      total,
-      client,
+      sale,
       delivery,
-      isTakeOut,
-      listSaleProducts,
-      listSaleExtras,
-      payMethod
+      payMethod,
+      date
     });
     const saveSaleHistory = await newSaleHistory.save();
     res.status(201).json(saveSaleHistory);
